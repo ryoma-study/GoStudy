@@ -1,12 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	xerrors "github.com/pkg/errors"
 	"os"
 )
 
-var AuthenticateErr = xerrors.New("authenticate failed")
+var AuthenticateErr = errors.New("authenticate failed")
 
 func main() {
 	err := test()
@@ -15,13 +16,14 @@ func main() {
 		//	//if xerrors.As(err, &AuthenticateErr) {
 		//	fmt.Printf("%+v", err)
 		//}
-		fmt.Printf("%+v", err)
+		fmt.Printf("%+v\n", err)
+		//fmt.Errorf("%w\n", err)
 		os.Exit(1)
 	}
 }
 
 func test() error {
-	return xerrors.Wrap(test1(), "from test1")
+	return xerrors.Wrapf(test1(), "from test1")
 }
 
 func test1() error {
