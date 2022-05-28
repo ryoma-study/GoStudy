@@ -1,5 +1,17 @@
 package main
 
+/**
+题目：
+1. 我们在数据库操作的时候，比如 dao 层中当遇到一个 sql.ErrNoRows 的时候，是否应该 Wrap 这个 error，抛给上层。为什么，应该怎么做请写出代码？
+
+思考：
+可以 wrap 这个 error，但是要保证 sql.ErrNoRows 是上层应用可识别的：
+
+解答：
+1. dao 层：如果是 sql.ErrNoRows 抛出业务可识的错误；否则则抛出系统错误
+2. 业务层：针对系统错误，抛出对应的问题；如果是 origin ErrNoRows 的错误，则根据业务场景处理
+*/
+
 import (
 	"database/sql"
 	"fmt"
@@ -21,12 +33,6 @@ func mockError() error {
 	return sql.ErrNoRows
 	//return sql.ErrTxDone
 }
-
-/**
-解答：
-1. dao 层：如果是 sql.ErrNoRows 抛出业务可识的错误；否则则抛出系统错误
-2. 业务层：针对系统错误，抛出对应的问题；如果是 origin ErrNoRows 的错误，则根据业务场景处理
-*/
 func main() {
 	err := biz1()
 	if err != nil {
