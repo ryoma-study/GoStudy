@@ -22,6 +22,11 @@ func mockError() error {
 	//return sql.ErrTxDone
 }
 
+/**
+解答：
+1. dao 层：如果是 sql.ErrNoRows 抛出业务可识的错误；否则则抛出系统错误
+2. 业务层：针对系统错误，抛出对应的问题；如果是 origin ErrNoRows 的错误，则根据业务场景处理
+*/
 func main() {
 	err := biz1()
 	if err != nil {
