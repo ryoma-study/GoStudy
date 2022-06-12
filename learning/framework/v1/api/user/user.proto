@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/api/annotations.proto";
+
+option go_package="api/user/user;proto";
+
+service HelloWorld {
+  rpc GetUser(UserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      post: "/getUser"
+      body: "*"
+    };
+  }
+}
+
+message UserRequest {
+  int64 id = 1;
+}
+
+message UserResponse {
+  int64 id = 1;
+  string name = 2;
+  int64 class = 3;
+  int64 level = 4;
+  string levelName = 5;
+}
