@@ -22,6 +22,7 @@ func (r *router) addRoute(method string, pattern string, handler HandlerFunc) {
 func (r *router) handle(c *Context) {
 	key := c.Method + "-" + c.Path
 	if handler, ok := r.handlers[key]; ok {
+		log.Printf("Route %4s - %s handled", c.Method, c.Path)
 		handler(c)
 	} else {
 		c.String(http.StatusNotFound, "404 NOT FOUND: %s\n", c.Path)
