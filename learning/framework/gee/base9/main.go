@@ -6,9 +6,10 @@ import (
 )
 
 func main() {
-	r := gee.New()
-	r.Use(gee.Logger())
-
+	r := gee.Default()
+	r.GET("/", func(c *gee.Context) {
+		c.String(http.StatusOK, "Hello Geektutu\n")
+	})
 	r.GET("/panic", func(c *gee.Context) {
 		names := []string{"geektutu"}
 		c.String(http.StatusOK, names[100])
