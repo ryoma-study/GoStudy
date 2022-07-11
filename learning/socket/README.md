@@ -28,4 +28,4 @@
 ### length field based frame decoder
 先定义一个 Header + Body 格式，其中 Header 中包含开始标记及 Body 长度，Body 中直接读取即可
 
-应用场景：比如普通的 HTTP 请求
+应用场景：比如普通的 HTTP 请求、比如 goim
